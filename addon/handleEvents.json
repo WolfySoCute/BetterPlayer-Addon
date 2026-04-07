@@ -1,23 +1,34 @@
 {
     "sections": [
         {
-            "title": "Template",
+            "title": "Фон",
             "items": [
                 {
-                    "id": "enabled",
-                    "name": "Enable demo badge",
-                    "description": "Показывать демонстрационный бейдж шаблона.",
+                    "id": "backgroundCover",
+                    "name": "Обложка на фон",
+                    "description": "Заменяет фон плеера на обложку трека",
                     "type": "button",
-                    "bool": true,
-                    "defaultParameter": true
+                    "value": true,
+                    "defaultValue": true
                 },
                 {
-                    "id": "accentColor",
-                    "name": "Accent color",
-                    "description": "Цвет рамки у плашки.",
-                    "type": "color",
-                    "input": "#4ade80",
-                    "defaultParameter": "#4ade80"
+                    "id": "backgroundImage",
+                    "name": "Фоновое изображение",
+                    "description": "Установить своё изображение для полноэкранного плеера",
+                    "type": "text",
+                    "value": "",
+                    "defaultValue": ""
+                },
+                {
+                    "id": "backgroundBrightness",
+                    "name": "Яркость (%)",
+                    "description": "Яркость фона полноэкранного плеера в процентах",
+                    "type": "slider",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "value": 0,
+                    "defaultValue": 100
                 }
             ]
         }
