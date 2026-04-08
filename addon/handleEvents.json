@@ -13,7 +13,7 @@
                 },
                 {
                     "id": "backgroundImage",
-                    "name": "Фоновое изображение",
+                    "name": "Своё фоновое изображение",
                     "description": "Установить своё изображение для полноэкранного плеера",
                     "type": "text",
                     "value": "",
@@ -27,8 +27,16 @@
                     "min": 0,
                     "max": 100,
                     "step": 1,
-                    "value": 0,
+                    "value": 100,
                     "defaultValue": 100
+                },
+                {
+                  "id": "backgroundBrightnessCorrection",
+                  "name": "Нормализация яркости",
+                  "description": "Автоматическое затемнение яркости фона плеера",
+                  "type": "button",
+                  "value": false,
+                  "defaultValue": false
                 }
             ]
         }
