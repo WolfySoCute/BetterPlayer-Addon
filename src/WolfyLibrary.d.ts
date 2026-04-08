@@ -136,9 +136,7 @@ export class StylesManager {
 export class EventEmitter<TEventMap extends Record<string, any> = Record<string, any>> {
     constructor();
 
-    // Строгая типизация для известных событий
     on<K extends keyof TEventMap>(eventName: K, callback: (data: TEventMap[K]) => void): void;
-    // Фолбек для любых других строк
     on(eventName: string, callback: (data?: any) => void): void;
 
     off<K extends keyof TEventMap>(eventName: K, callback: (data: TEventMap[K]) => void): void;
