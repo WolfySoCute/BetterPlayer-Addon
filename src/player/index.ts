@@ -7,6 +7,7 @@ interface AddonSettings {
     backgroundCover: { value: boolean, default: boolean };
     backgroundImage: { value: string, default: string };
     backgroundBrightness: { value: number, default: number };
+    backgroundBrightnessCorrection: { value: boolean, default: boolean };
 }
 
 export function mountPlayer(): void {
@@ -26,6 +27,10 @@ export function mountPlayer(): void {
 
     addon.addAction('backgroundBrightness', (ctx) => {
         background.setBrightness(ctx.setting.value);
+    });
+
+    addon.addAction('backgroundBrightnessCorrection', (ctx) => {
+        background.setBrightnessCorrection(ctx.setting.value);
     });
 
     addon.player.on('openPlayer', (ctx) => {
