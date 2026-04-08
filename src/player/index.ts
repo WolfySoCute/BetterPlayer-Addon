@@ -8,6 +8,7 @@ interface AddonSettings {
     backgroundImage: { value: string, default: string };
     backgroundBrightness: { value: number, default: number };
     backgroundBrightnessCorrection: { value: boolean, default: boolean };
+    backgroundBlur: { value: number, default: number };
 }
 
 export function mountPlayer(): void {
@@ -33,10 +34,15 @@ export function mountPlayer(): void {
         background.setBrightnessCorrection(ctx.setting.value);
     });
 
+    addon.addAction('backgroundBlur', (ctx) => {
+        background.setBlur(ctx.setting.value);
+    });
+
     addon.player.on('openPlayer', (ctx) => {
         const backgroundCover = ctx.settings.get('backgroundCover');
         const backgroundImage = ctx.settings.get('backgroundImage');
         const backgroundBrightness = ctx.settings.get('backgroundBrightness');
+        const backgroundBlur = ctx.settings.get('backgroundBlur');
 
         const image = backgroundCover.value ?
             'https://' + ctx.state.track.coverUri.replace('%%', '1000x1000') :
@@ -44,6 +50,7 @@ export function mountPlayer(): void {
 
         background.setImage(image);
         background.setBrightness(backgroundBrightness.value);
+        background.setBlur(backgroundBlur.value);
     });
 
     addon.player.on('trackChange', (ctx) => {

@@ -103,4 +103,11 @@ export class Background {
             backgroundDiv.classList.add('animate');
         });
     }
+
+    public setBlur(blur: number) {
+        const backgroundDiv = this.backgroundDiv;
+        if (!backgroundDiv) return;
+
+        backgroundDiv.style.setProperty('--blur', `${blur}px`);
+    }
 }
