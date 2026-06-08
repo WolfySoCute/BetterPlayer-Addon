@@ -1,15 +1,7 @@
 import addonConfig from '../../addon.config.mjs'
-import {FULLSCREEN_PLAYER} from '@/player/constants';
+import {AddonSettings} from '@/player/constants';
 import {Background} from '@/player/background';
-
-
-interface AddonSettings {
-    backgroundCover: { value: boolean, default: boolean };
-    backgroundImage: { value: string, default: string };
-    backgroundBrightness: { value: number, default: number };
-    backgroundBrightnessCorrection: { value: boolean, default: boolean };
-    backgroundBlur: { value: number, default: number };
-}
+import {Controls} from '@/player/controls';
 
 export function mountPlayer(): void {
     if (!window.__WOLFYLIBRARY_LOADED__ || window.Addon == undefined) {
@@ -18,12 +10,31 @@ export function mountPlayer(): void {
     }
 
     const addon = new window.Addon<AddonSettings>(addonConfig.name);
-    const background = new Background(FULLSCREEN_PLAYER);
+    const background = new Background();
+    const controls = new Controls();
+
+    addon.addAction('controlsEnabled', (ctx) => {
+        controls.setCustomControls(ctx.setting.value);
+    });
+
+    addon.addAction('controlsHideCover', (ctx) => {
+        controls.hideCover(ctx.setting.value);
+    });
 
     addon.addAction('backgroundImage', (ctx) => {
         const backgroundCover = ctx.settings.get('backgroundCover');
 
         if (!backgroundCover.value) background.setImage(ctx.setting.value);
+    });
+
+    addon.addAction('backgroundCover', (ctx) => {
+        const backgroundImage = ctx.settings.get('backgroundImage');
+
+        const image = ctx.setting.value ?
+            'https://' + ctx.state.track.coverUri.replace('%%', '1000x1000') :
+            backgroundImage.value;
+
+        background.setImage(image);
     });
 
     addon.addAction('backgroundBrightness', (ctx) => {
@@ -43,14 +54,18 @@ export function mountPlayer(): void {
         const backgroundImage = ctx.settings.get('backgroundImage');
         const backgroundBrightness = ctx.settings.get('backgroundBrightness');
         const backgroundBlur = ctx.settings.get('backgroundBlur');
+        const controlsHideCover = ctx.settings.get('controlsHideCover');
+        const controlsEnabled = ctx.settings.get('controlsEnabled');
 
         const image = backgroundCover.value ?
             'https://' + ctx.state.track.coverUri.replace('%%', '1000x1000') :
             backgroundImage.value;
 
         background.setImage(image);
+        controls.hideCover(controlsHideCover.value);
         background.setBrightness(backgroundBrightness.value);
         background.setBlur(backgroundBlur.value);
+        controls.setCustomControls(controlsEnabled.value);
     });
 
     addon.player.on('trackChange', (ctx) => {
