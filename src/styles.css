@@ -1,4 +1,6 @@
+/* ДЛЯ СМЕНЫ ФОНА */
 div[data-test-id='FULLSCREEN_PLAYER_MODAL']::before {
+    opacity: 1;
     background: var(--background);
 }
 
@@ -29,4 +31,203 @@ div[data-test-id='FULLSCREEN_PLAYER_MODAL']::after {
     transition:
         opacity 0.5s ease-in-out,
         filter 0.5s ease-in-out;
+}
+
+.PlayQueue_root__ponhw::after,
+.PlayQueue_root__ponhw::before,
+div[data-test-id='SYNC_LYRICS_CONTENT']::after,
+div[data-test-id='SYNC_LYRICS_CONTENT']::before {
+    display: none;
+}
+
+/* СПРЯТАТЬ КАКОЙ-ТО ЭЛЕМЕНТ */
+.hidden {
+    display: none !important;
+}
+
+/* СТРАШНЫЕ СТИЛИ ДЛЯ ДОП. КОНТЕНТА */
+div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) {
+    transform: translate(calc(50dvw - var(--fullscreen-player-content-size-px)/2), calc(100dvh - var(--fullscreen-player-height-px)/2 + 32px));
+    animation-name: none;
+}
+
+div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] {
+    transform: translate(50%);
+    height: calc(100% - (var(--fullscreen-player-content-size-px)/2) - 8px - 32px);
+    top: 32px;
+
+    mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        black 25%,
+        black 75%,
+        transparent 100%
+    );
+}
+
+div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] div[data-test-id="PLAY_QUEUE"],
+div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] div[data-test-id="PLAY_QUEUE"] .PlayQueue_content__zIUvd,
+div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] div[data-test-id="PLAY_QUEUE"] .PlayQueue_content__zIUvd div[data-test-id="PLAY_QUEUE_AFTER_PLAYING_BLOCK"],
+div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] .SyncLyrics_root__6KZg4,
+div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] .FullscreenPlayerDesktopContent_syncLyrics__6dTfH
+{
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+    margin-block: 0;
+}
+
+div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] div[data-test-id="SYNC_LYRICS_CONTENT"] {
+    container-type: size;
+}
+
+div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] div[data-test-id="SYNC_LYRICS_CONTENT"] > div {
+    /*padding-block-start: calc(50cqh - 2rem/2);*/
+    padding-block-start: 50cqh;
+}
+
+div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"][class*="enter_active"] {
+    animation-name: FullscreenPlayerDesktopContent_enter-fade-additional-content_custom;
+}
+
+div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"][class*="exit_active"] {
+    animation-name: FullscreenPlayerDesktopContent_leave-fade-additional-content_custom;
+}
+
+@keyframes FullscreenPlayerDesktopContent_enter-fade-additional-content_custom {
+    0% {
+        transform: translate(0dvw);
+        opacity: 0
+    }
+
+    50% {
+        transform: translate(26dvw);
+    }
+
+    to {
+        transform: translate(25dvw);
+        opacity: 1
+    }
+}
+
+@keyframes FullscreenPlayerDesktopContent_leave-fade-additional-content_custom {
+    0% {
+        transform: translate(25dvw);
+        opacity: 1
+    }
+
+    40% {
+        opacity: 0
+    }
+
+    to {
+        transform: translate(0dvw);
+        opacity: 0
+    }
+}
+
+/* СТИЛИ ДЛЯ ПАНЕЛЬКИ С КАСТОМНЫМИ КНОПКАМИ */
+.customControls {
+    margin: 26px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.customControls .customButton {
+    color: var(--ym-controls-color-secondary-text-enabled_variant);
+    justify-content: center;
+    background: none;
+
+    border-radius: var(--ym-radius-size-round);
+    border: none;
+    cursor: pointer;
+    transition:
+        background-color var(--ym-duration-transition),
+        transform var(--ym-duration-transition),
+        color var(--ym-duration-transition),
+        opacity var(--ym-duration-transition);
+}
+
+.customControls .customButton.bordered {
+    border-style: solid;
+    border-width: 3px;
+    border-color: var(--ym-controls-color-secondary-text-enabled_variant);
+}
+
+.customControls .customButton.notActive {
+    opacity: 0.6;
+}
+
+.customControls .customButton:disabled {
+    cursor: unset;
+    color: var(--ym-controls-color-secondary-text-disabled);
+}
+
+.customControls .customButton:not(:disabled):focus-visible,
+.customControls .customButton:not(:disabled):hover {
+    transform: scale(1.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .customControls .customButton,
+    .customControls .customButton:not(:disabled) {
+        transition: none;
+    }
+}
+
+.customControls .customButton.small {
+    padding-block-end: var(--ym-spacer-size-s);
+    padding-block-start: var(--ym-spacer-size-s);
+    padding-inline-end: var(--ym-spacer-size-s);
+    padding-inline-start: var(--ym-spacer-size-s);
+}
+
+.customControls .customButton.small svg {
+    height: var(--ym-icon-size-xs);
+    width: var(--ym-icon-size-xs);
+}
+
+.customControls .customButton.medium {
+    padding-block-end: var(--ym-spacer-size-l);
+    padding-block-start: var(--ym-spacer-size-l);
+    padding-inline-end: var(--ym-spacer-size-l);
+    padding-inline-start: var(--ym-spacer-size-l);
+}
+
+.customControls .customButton.medium svg {
+    height: var(--ym-icon-size-m);
+    width: var(--ym-icon-size-m);
+}
+
+.customControls .customButton.large {
+    padding-block-end: var(--ym-spacer-size-l);
+    padding-block-start: var(--ym-spacer-size-l);
+    padding-inline-end: var(--ym-spacer-size-l);
+    padding-inline-start: var(--ym-spacer-size-l);
+}
+
+.customControls .customButton.large svg {
+    height: var(--ym-icon-size-l);
+    width: var(--ym-icon-size-l);
+}
+
+:has(> .customControls) > div[data-test-id="TIMECODE_WRAPPER"] {
+    column-gap: var(--ym-spacer-size-xs) !important;
+    grid-template: 'start slider end' auto/min-content auto min-content !important;
+    row-gap: normal !important;
+}
+
+:has(> .customControls) {
+    height: fit-content;
+    width: fit-content;
+}
+
+:has(> .customControls) > .FullscreenPlayerDesktopContent_meta__3jDTy {
+    padding-top: 0;
+    /*padding: 0;*/
+}
+
+div[data-test-id="FULLSCREEN_PLAYER_MODAL"][style*="--background"] input[data-test-id="TIMECODE_SLIDER"] {
+    --slider-thumb-box-shadow-color: transparent !important;
 }
