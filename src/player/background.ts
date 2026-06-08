@@ -1,4 +1,5 @@
 import {getBrightnessCorrection, normalizePath} from '@/utils';
+import {FULLSCREEN_PLAYER} from '@/player/constants';
 
 export class Background {
     private _brightnessCorrection: boolean = false;
@@ -6,16 +7,12 @@ export class Background {
     private _pendingImageLink: string | undefined = undefined;
     private _safetyTimer: number | null = null;
 
-    constructor(public backgroundSelector: string) {
-        this.backgroundSelector = backgroundSelector;
-    }
-
     get backgroundDiv(): HTMLDivElement | null {
         if (!document.body) {
             return null;
         }
 
-        return document.querySelector(this.backgroundSelector);
+        return document.querySelector(FULLSCREEN_PLAYER);
     }
 
     public setBrightnessCorrection(brightnessCorrection: boolean) {
