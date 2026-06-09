@@ -21,6 +21,10 @@ export function mountPlayer(): void {
         controls.hideCover(ctx.setting.value);
     });
 
+    addon.addAction('controlsContentBackgroundStyle', (ctx) => {
+        controls.setContentBackground(ctx.setting.value);
+    });
+
     addon.addAction('backgroundImage', (ctx) => {
         const backgroundCover = ctx.settings.get('backgroundCover');
 
@@ -56,6 +60,7 @@ export function mountPlayer(): void {
         const backgroundBlur = ctx.settings.get('backgroundBlur');
         const controlsHideCover = ctx.settings.get('controlsHideCover');
         const controlsEnabled = ctx.settings.get('controlsEnabled');
+        const controlsContentBackgroundStyle = ctx.settings.get('controlsContentBackgroundStyle');
 
         const image = backgroundCover.value ?
             'https://' + ctx.state.track.coverUri.replace('%%', '1000x1000') :
@@ -66,6 +71,7 @@ export function mountPlayer(): void {
         background.setBrightness(backgroundBrightness.value);
         background.setBlur(backgroundBlur.value);
         controls.setCustomControls(controlsEnabled.value);
+        controls.setContentBackground(controlsContentBackgroundStyle.value);
     });
 
     addon.player.on('trackChange', (ctx) => {
