@@ -24,6 +24,11 @@ export class Controls {
         else posterDiv?.classList.remove('hidden');
     }
 
+    public setContentBackground(id: number) {
+        const fullscreenPlayerDiv = this.fullscreenPlayerDiv;
+        fullscreenPlayerDiv?.style.setProperty('--content-background-style', id.toString());
+    }
+
     private createControlsDiv() {
         const controlsDiv = document.createElement('div');
 
