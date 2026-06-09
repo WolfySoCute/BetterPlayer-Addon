@@ -13,11 +13,33 @@
 				},
 				{
 					"id": "controlsHideCover",
-					"name": "Скрыть обложку трека, расположенную в центре",
-					"description": "Скрыть",
+					"name": "Скрыть обложку трека",
+					"description": "Скрыть обложку трека, вместе с элементами управления, расположенную в центре",
 					"type": "button",
 					"value": true,
 					"defaultValue": true
+				},
+				{
+					"id": "controlsContentBackgroundStyle",
+					"name": "Стиль фона плеера управления",
+					"description": "",
+					"type": "selector",
+					"value": 1,
+					"options": {
+						"1": {
+							"event": "none",
+							"name": "Отсутствует"
+						},
+						"2": {
+							"event": "blackBlur",
+							"name": "Темный с блюром"
+						},
+						"3": {
+							"event": "inverted",
+							"name": "Инвертированный"
+						}
+					},
+					"defaultValue": 1
 				}
 			]
 		},
