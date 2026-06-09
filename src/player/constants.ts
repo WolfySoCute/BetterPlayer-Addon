@@ -1,6 +1,7 @@
 export interface AddonSettings {
     controlsEnabled: { value: boolean, default: boolean };
     controlsHideCover: { value: boolean, default: boolean };
+    controlsContentBackgroundStyle: { value: number, default: number };
 
     backgroundCover: { value: boolean, default: boolean };
     backgroundImage: { value: string, default: string };
@@ -8,7 +9,6 @@ export interface AddonSettings {
     backgroundBrightnessCorrection: { value: boolean, default: boolean };
     backgroundBlur: { value: number, default: number };
 }
-
 
 export const FULLSCREEN_PLAYER = 'div[data-test-id="FULLSCREEN_PLAYER_MODAL"]';
 
