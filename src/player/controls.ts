@@ -64,12 +64,14 @@ export class Controls {
         if (controlsEnabled && customControls !== null) return;
 
         if (controlsEnabled) {
+            this.hideCover(true);
             const timecodeWrapper = fullscreenPlayerDiv.querySelector(PLAYER_CONTROLS.timecodeWrapper);
             const playerControls = timecodeWrapper?.parentElement;
 
             playerControls?.appendChild(this.createControlsDiv());
         } else {
             if (customControls !== null) {
+                this.hideCover(false);
                 customControls.remove();
             }
         }

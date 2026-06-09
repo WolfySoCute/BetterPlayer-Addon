@@ -17,10 +17,6 @@ export function mountPlayer(): void {
         controls.setCustomControls(ctx.setting.value);
     });
 
-    addon.addAction('controlsHideCover', (ctx) => {
-        controls.hideCover(ctx.setting.value);
-    });
-
     addon.addAction('controlsContentBackgroundStyle', (ctx) => {
         controls.setContentBackground(ctx.setting.value);
     });
@@ -58,7 +54,6 @@ export function mountPlayer(): void {
         const backgroundImage = ctx.settings.get('backgroundImage');
         const backgroundBrightness = ctx.settings.get('backgroundBrightness');
         const backgroundBlur = ctx.settings.get('backgroundBlur');
-        const controlsHideCover = ctx.settings.get('controlsHideCover');
         const controlsEnabled = ctx.settings.get('controlsEnabled');
         const controlsContentBackgroundStyle = ctx.settings.get('controlsContentBackgroundStyle');
 
@@ -67,7 +62,6 @@ export function mountPlayer(): void {
             backgroundImage.value;
 
         background.setImage(image);
-        controls.hideCover(controlsHideCover.value);
         background.setBrightness(backgroundBrightness.value);
         background.setBlur(backgroundBlur.value);
         controls.setCustomControls(controlsEnabled.value);

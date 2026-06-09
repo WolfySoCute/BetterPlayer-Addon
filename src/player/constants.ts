@@ -1,6 +1,5 @@
 export interface AddonSettings {
     controlsEnabled: { value: boolean, default: boolean };
-    controlsHideCover: { value: boolean, default: boolean };
     controlsContentBackgroundStyle: { value: number, default: number };
 
     backgroundCover: { value: boolean, default: boolean };
