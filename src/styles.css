@@ -47,33 +47,38 @@ div[data-test-id='SYNC_LYRICS_CONTENT']::before {
 
 /* СТРАШНЫЕ СТИЛИ ДЛЯ ДОП. КОНТЕНТА */
 div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) {
-    transform: translate(calc(50dvw - var(--fullscreen-player-content-size-px)/2), calc(100dvh - var(--fullscreen-player-height-px)/2 + 32px));
+    transform: translate(calc(50dvw - var(--fullscreen-player-content-size-px)/2), calc(100dvh - var(--fullscreen-player-height-px)/2 + 16px));
     animation-name: none;
 }
 
 div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] {
     transform: translate(50%);
-    height: calc(100% - (var(--fullscreen-player-content-size-px)/2) - 8px - 32px);
-    top: 32px;
+    height: calc(100% - (var(--fullscreen-player-content-size-px)/2) - 24px - 32px);
+    top: 24px;
+    border-radius: 16px;
+    padding: 24px;
 
+    transition: background-color var(--ym-duration-transition),
+        backdrop-filter var(--ym-duration-transition);
+}
+
+div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] > div {
     mask-image: linear-gradient(
-        to bottom,
-        transparent 0%,
-        black 25%,
-        black 75%,
-        transparent 100%
+            to bottom,
+            transparent 0%,
+            black 25%,
+            black 75%,
+            transparent 100%
     );
 }
 
-div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] div[data-test-id="PLAY_QUEUE"],
-div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] div[data-test-id="PLAY_QUEUE"] .PlayQueue_content__zIUvd,
-div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] div[data-test-id="PLAY_QUEUE"] .PlayQueue_content__zIUvd div[data-test-id="PLAY_QUEUE_AFTER_PLAYING_BLOCK"],
-div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] .SyncLyrics_root__6KZg4,
-div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] .FullscreenPlayerDesktopContent_syncLyrics__6dTfH
+div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] > div,
+div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] > div .PlayQueue_content__zIUvd,
+div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] > div .PlayQueue_content__zIUvd div[data-test-id="PLAY_QUEUE_AFTER_PLAYING_BLOCK"]
 {
     height: 100%;
     min-height: 100%;
-    margin: 0;
+    position: unset;
     margin-block: 0;
 }
 
@@ -82,7 +87,7 @@ div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="F
 }
 
 div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] div[data-test-id="SYNC_LYRICS_CONTENT"] > div {
-    /*padding-block-start: calc(50cqh - 2rem/2);*/
+    /*padding-block-start: calc(50cqh + 2rem/2);*/
     padding-block-start: 50cqh;
 }
 
@@ -128,7 +133,8 @@ div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="F
 
 /* СТИЛИ ДЛЯ ПАНЕЛЬКИ С КАСТОМНЫМИ КНОПКАМИ */
 .customControls {
-    margin: 26px 0;
+    margin-top: 16px;
+    /*margin: 26px 0;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -219,15 +225,36 @@ div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="F
 }
 
 :has(> .customControls) {
+    padding: 24px;
+    border-radius: 16px;
     height: fit-content;
     width: fit-content;
+
+    transition: background-color var(--ym-duration-transition),
+        backdrop-filter var(--ym-duration-transition);
 }
 
 :has(> .customControls) > .FullscreenPlayerDesktopContent_meta__3jDTy {
     padding-top: 0;
-    /*padding: 0;*/
 }
 
 div[data-test-id="FULLSCREEN_PLAYER_MODAL"][style*="--background"] input[data-test-id="TIMECODE_SLIDER"] {
     --slider-thumb-box-shadow-color: transparent !important;
+}
+
+/* ТЕМЫ ДЛЯ ФОНА ЭЛЕМЕНТОВ ПЛЕЕРА */
+@container style(--content-background-style: 2) {
+    div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"],
+    :has(> .customControls) {
+        background-color: rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(15px);
+    }
+}
+
+@container style(--content-background-style: 3) {
+    div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"],
+    :has(> .customControls) {
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: invert(1) blur(15px);
+    }
 }
