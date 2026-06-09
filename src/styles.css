@@ -131,6 +131,13 @@ div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="F
     }
 }
 
+body:has(div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT'] div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden)
+:has(> div[data-test-id="TRACK_CONTEXT_MENU"]){
+    top: initial !important;
+    left: 25vw !important;
+    bottom: 10vh !important;
+}
+
 /* СТИЛИ ДЛЯ ПАНЕЛЬКИ С КАСТОМНЫМИ КНОПКАМИ */
 .customControls {
     margin-top: 16px;
