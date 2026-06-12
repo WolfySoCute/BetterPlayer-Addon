@@ -11,7 +11,7 @@ div[data-custom-controls="true"] div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_
     animation-name: none;
 }
 
-div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"] {
+div[data-custom-controls="true"] div[class*="additionalContent"] {
     transform: translate(50%);
     height: calc(100% - (var(--fullscreen-player-content-size-px)/2) - 24px - 32px);
     top: 24px;
@@ -22,7 +22,7 @@ div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_addi
     backdrop-filter var(--ym-duration-transition);
 }
 
-div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"] > div {
+div[data-custom-controls="true"] div[class*="additionalContent"] > div {
     mask-image: linear-gradient(
             to bottom,
             transparent 0%,
@@ -32,9 +32,9 @@ div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_addi
     );
 }
 
-div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"] > div,
-div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"] .PlayQueue_content__zIUvd,
-div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"] div[data-test-id="PLAY_QUEUE_AFTER_PLAYING_BLOCK"]
+div[data-custom-controls="true"] div[class*="additionalContent"] > div,
+div[data-custom-controls="true"] div[class*="additionalContent"] .PlayQueue_content__zIUvd,
+div[data-custom-controls="true"] div[class*="additionalContent"] div[data-test-id="PLAY_QUEUE_AFTER_PLAYING_BLOCK"]
 {
     height: 100%;
     min-height: 100%;
@@ -42,19 +42,19 @@ div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_addi
     margin-block: 0;
 }
 
-div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"] div[data-test-id="SYNC_LYRICS_CONTENT"] {
+div[data-custom-controls="true"] div[class*="additionalContent"] div[data-test-id="SYNC_LYRICS_CONTENT"] {
     container-type: size;
 }
 
-div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"] div[data-test-id="SYNC_LYRICS_CONTENT"] > div {
+div[data-custom-controls="true"] div[class*="additionalContent"] div[data-test-id="SYNC_LYRICS_CONTENT"] > div {
     padding-block-start: 50cqh;
 }
 
-div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"][class*="enter_active"] {
+div[data-custom-controls="true"] div[class*="additionalContent"][class*="enter_active"] {
     animation-name: FullscreenPlayerDesktopContent_enter-fade-additional-content_custom;
 }
 
-div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"][class*="exit_active"] {
+div[data-custom-controls="true"] div[class*="additionalContent"][class*="exit_active"] {
     animation-name: FullscreenPlayerDesktopContent_leave-fade-additional-content_custom;
 }
 
