@@ -1,0 +1,113 @@
+/*
+    Стили для панели с кастомными кнопками
+*/
+
+.customControls {
+    margin-top: 16px;
+    /*margin: 26px 0;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.customControls .customButton {
+    color: var(--ym-controls-color-secondary-text-enabled_variant);
+    justify-content: center;
+    background: none;
+
+    border-radius: var(--ym-radius-size-round);
+    border: none;
+    cursor: pointer;
+    transition:
+            background-color var(--ym-duration-transition),
+            transform var(--ym-duration-transition),
+            color var(--ym-duration-transition),
+            opacity var(--ym-duration-transition);
+}
+
+.customControls .customButton.bordered {
+    border-style: solid;
+    border-width: 3px;
+    border-color: var(--ym-controls-color-secondary-text-enabled_variant);
+}
+
+.customControls .customButton.notActive {
+    opacity: 0.6;
+}
+
+.customControls .customButton:disabled {
+    cursor: unset;
+    color: var(--ym-controls-color-secondary-text-disabled);
+}
+
+.customControls .customButton:not(:disabled):focus-visible,
+.customControls .customButton:not(:disabled):hover {
+    transform: scale(1.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .customControls .customButton,
+    .customControls .customButton:not(:disabled) {
+        transition: none;
+    }
+}
+
+.customControls .customButton.small {
+    padding-block-end: var(--ym-spacer-size-s);
+    padding-block-start: var(--ym-spacer-size-s);
+    padding-inline-end: var(--ym-spacer-size-s);
+    padding-inline-start: var(--ym-spacer-size-s);
+}
+
+.customControls .customButton.small svg {
+    height: var(--ym-icon-size-xs);
+    width: var(--ym-icon-size-xs);
+}
+
+.customControls .customButton.medium {
+    padding-block-end: var(--ym-spacer-size-l);
+    padding-block-start: var(--ym-spacer-size-l);
+    padding-inline-end: var(--ym-spacer-size-l);
+    padding-inline-start: var(--ym-spacer-size-l);
+}
+
+.customControls .customButton.medium svg {
+    height: var(--ym-icon-size-m);
+    width: var(--ym-icon-size-m);
+}
+
+.customControls .customButton.large {
+    padding-block-end: var(--ym-spacer-size-l);
+    padding-block-start: var(--ym-spacer-size-l);
+    padding-inline-end: var(--ym-spacer-size-l);
+    padding-inline-start: var(--ym-spacer-size-l);
+}
+
+.customControls .customButton.large svg {
+    height: var(--ym-icon-size-l);
+    width: var(--ym-icon-size-l);
+}
+
+:has(> .customControls) > div[data-test-id="TIMECODE_WRAPPER"] {
+    column-gap: var(--ym-spacer-size-xs) !important;
+    grid-template: 'start slider end' auto/min-content auto min-content !important;
+    row-gap: normal !important;
+}
+
+:has(> .customControls) {
+    padding: 24px;
+    border-radius: 16px;
+    height: fit-content;
+    width: fit-content;
+
+    transition: background-color var(--ym-duration-transition),
+    backdrop-filter var(--ym-duration-transition);
+}
+
+:has(> .customControls) > .FullscreenPlayerDesktopContent_meta__3jDTy {
+    padding-top: 0;
+}
+
+div[data-test-id="FULLSCREEN_PLAYER_MODAL"][style*="--background"] input[data-test-id="TIMECODE_SLIDER"] {
+    --slider-thumb-box-shadow-color: transparent !important;
+}
