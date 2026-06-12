@@ -1,4 +1,5 @@
 import {CONTROLS_ICONS, ControlsIconsType, PLAYER_CONTROLS} from '@/player/constants';
+import {logger} from '@/logger';
 
 export enum ButtonSize {
     SMALL = 0,
@@ -21,9 +22,11 @@ export abstract class ControlButton {
         public icon: ControlsIconsType,
         public haveBorder: boolean = false
     ) {
+        logger.debug('Создаем кнопку', this.id);
         this._button = this.createButton();
         this.bindEvents();
         this.initObservers();
+        logger.debug(`Кнопка ${this.id} создана`);
     }
 
     private createButton() {
@@ -70,6 +73,8 @@ export abstract class ControlButton {
     private bindEvents() {
         this._button.addEventListener('click', () => {
             if (this.disabled) return;
+            logger.debug(`Кнопка ${this.id} нажата`);
+
             if (this.originalControlButton) {
                 this.originalControlButton.click();
             }
@@ -79,6 +84,7 @@ export abstract class ControlButton {
     }
 
     private initObservers() {
+        logger.debug(`Инициализация обсерверов кнопки ${this.id}...`);
         this.attributesObserver = new MutationObserver(() => this.syncOriginalState());
 
         this.domObserver = new MutationObserver(() => this.findOriginalButton());
@@ -92,12 +98,14 @@ export abstract class ControlButton {
     }
 
     private findOriginalButton() {
+        logger.debug(`Поиск оригинальной кнопки ${this.id}...`, this.selector);
         const playerContainer = document.querySelector(PLAYER_CONTROLS.posterContent);
 
         let foundBtn: HTMLButtonElement | null = null;
 
         if (playerContainer) {
             foundBtn = playerContainer.querySelector<HTMLButtonElement>(this.selector);
+            logger.debug(`Оригинальная кнопка ${this.id} найдена!`, foundBtn);
         }
 
         if (foundBtn !== this.originalControlButton) {
@@ -116,6 +124,8 @@ export abstract class ControlButton {
     }
 
     private syncOriginalState() {
+        logger.debug('Синхронизация состояния кнопки', this.id);
+
         if (!this.originalControlButton) {
             this.disabled = true;
         } else {

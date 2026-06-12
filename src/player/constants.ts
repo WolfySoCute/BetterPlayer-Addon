@@ -7,6 +7,8 @@ export interface AddonSettings {
     backgroundBrightness: { value: number, default: number };
     backgroundBrightnessCorrection: { value: boolean, default: boolean };
     backgroundBlur: { value: number, default: number };
+
+    debugMode: { value: boolean, default: boolean };
 }
 
 export const FULLSCREEN_PLAYER = 'div[data-test-id="FULLSCREEN_PLAYER_MODAL"]';

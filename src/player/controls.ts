@@ -8,6 +8,7 @@ import {
     PrevButton, QueueButton,
     RepeatButton, ShuffleButton,
 } from '@/elements/controlButton';
+import {logger} from '@/logger';
 
 export class Controls {
     get fullscreenPlayerDiv(): HTMLDivElement | null {
@@ -21,9 +22,11 @@ export class Controls {
     public setContentBackground(id: number) {
         const fullscreenPlayerDiv = this.fullscreenPlayerDiv;
         fullscreenPlayerDiv?.style.setProperty('--content-background-style', id.toString());
+        logger.debug('--content-background-style изменен на:', fullscreenPlayerDiv?.style.getPropertyValue('--content-background-style'));
     }
 
     private createControlsDiv() {
+        logger.debug('Создаем кастомные кнопки');
         const controlsDiv = document.createElement('div');
 
         const queueButton = new QueueButton(ButtonSize.SMALL);
@@ -58,14 +61,17 @@ export class Controls {
         if (controlsEnabled && customControls) return;
 
         if (controlsEnabled) {
+            logger.debug('Устанавливаем кастомные кнопки');
             fullscreenPlayerDiv.dataset.customControls = 'true';
             const timecodeWrapper = fullscreenPlayerDiv.querySelector(PLAYER_CONTROLS.timecodeWrapper);
             const playerControls = timecodeWrapper?.parentElement;
 
             playerControls?.appendChild(this.createControlsDiv());
+            logger.debug('Кастомные кнопки установлены');
         } else {
             fullscreenPlayerDiv.dataset.customControls = 'false';
             if (customControls) {
+                logger.debug('Удаляем кастомные кнопки');
                 customControls.remove();
             }
         }

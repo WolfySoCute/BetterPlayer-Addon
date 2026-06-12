@@ -1,5 +1,6 @@
 import {getBrightnessCorrection, normalizePath} from '@/utils';
 import {FULLSCREEN_PLAYER} from '@/player/constants';
+import {logger} from '@/logger';
 
 export class Background {
     private _brightnessCorrection: boolean = false;
@@ -28,6 +29,7 @@ export class Background {
 
         if (!targetImageLink || !this._brightnessCorrection) {
             backgroundDiv.style.setProperty('--brightness-correction', '1');
+            logger.debug('--brightness-correction изменен на:', backgroundDiv.style.getPropertyValue('--brightness-correction'));
             return;
         }
 
@@ -35,6 +37,7 @@ export class Background {
             .then(r => {
                 if (this._pendingImageLink !== targetImageLink) return;
                 backgroundDiv.style.setProperty('--brightness-correction', r.toString());
+                logger.debug('--brightness-correction изменен на:', backgroundDiv.style.getPropertyValue('--brightness-correction'));
             })
             .catch(e => console.error(e));
     }
@@ -45,6 +48,7 @@ export class Background {
 
         const brightnessNormalized = brightness / 100;
         backgroundDiv.style.setProperty('--brightness', brightnessNormalized.toString());
+        logger.debug('--brightness изменен на:', backgroundDiv.style.getPropertyValue('--brightness'));
     }
 
     public setImage(imageLink: string) {
@@ -66,14 +70,17 @@ export class Background {
 
         this.updateBrightnessCorrection(imageLink);
         backgroundDiv.style.setProperty('--background-next', backgroundImage);
+        logger.debug('--background-next изменен на:', backgroundDiv.style.getPropertyValue('--background-next'));
 
         const finishAnimation = () => {
             if (this._safetyTimer) clearTimeout(this._safetyTimer);
             backgroundDiv.removeEventListener('transitionend', onTransitionEnd);
 
             backgroundDiv.style.setProperty('--background', backgroundImage);
+            logger.debug('--background изменен на:', backgroundDiv.style.getPropertyValue('--background'));
             backgroundDiv.classList.remove('animate');
             backgroundDiv.style.removeProperty('--background-next');
+            logger.debug('--background-next изменен на:', backgroundDiv.style.getPropertyValue('--background-next'));
 
             setTimeout(() => {
                 this._isAnimating = false;
@@ -90,7 +97,7 @@ export class Background {
         };
 
         this._safetyTimer = window.setTimeout(() => {
-            console.warn("Safety timeout triggered: transitionend missed.");
+            logger.warn("Safety timeout triggered: transitionend missed.");
             finishAnimation();
         }, 700);
 
@@ -106,5 +113,6 @@ export class Background {
         if (!backgroundDiv) return;
 
         backgroundDiv.style.setProperty('--blur', `${blur}px`);
+        logger.debug('--blur изменен на:', backgroundDiv.style.getPropertyValue('--blur'));
     }
 }

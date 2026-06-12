@@ -2,12 +2,16 @@ import addonConfig from '../../addon.config.mjs'
 import {AddonSettings} from '@/player/constants';
 import {Background} from '@/player/background';
 import {Controls} from '@/player/controls';
+import { logger } from '@/logger';
 
 export function mountPlayer(): void {
     if (!window.__WOLFYLIBRARY_LOADED__ || window.Addon == undefined) {
+        logger.info('WolfyLibrary ещё не инициализирован! Повторная попытка инициализации аддона...');
         setTimeout(mountPlayer, 100);
         return;
     }
+
+    logger.info('WolfyLibrary инициализирован. Инициализация аддона продолжается...');
 
     const addon = new window.Addon<AddonSettings>(addonConfig.name);
     const background = new Background();
@@ -15,20 +19,24 @@ export function mountPlayer(): void {
 
     addon.addAction('controlsEnabled', (ctx) => {
         controls.setCustomControls(ctx.setting.value);
+        logger.debug('controlsEnabled изменил значение:', ctx.setting.value);
     });
 
     addon.addAction('controlsContentBackgroundStyle', (ctx) => {
         controls.setContentBackground(ctx.setting.value);
+        logger.debug('controlsContentBackgroundStyle изменил значение:', ctx.setting.value);
     });
 
     addon.addAction('backgroundImage', (ctx) => {
         const backgroundCover = ctx.settings.get('backgroundCover');
+        logger.debug('backgroundImage изменил значение:', ctx.setting.value);
 
         if (!backgroundCover.value) background.setImage(ctx.setting.value);
     });
 
     addon.addAction('backgroundCover', (ctx) => {
         const backgroundImage = ctx.settings.get('backgroundImage');
+        logger.debug('backgroundCover изменил значение:', ctx.setting.value);
 
         const image = ctx.setting.value ?
             'https://' + ctx.state.track.coverUri.replace('%%', '1000x1000') :
@@ -39,17 +47,27 @@ export function mountPlayer(): void {
 
     addon.addAction('backgroundBrightness', (ctx) => {
         background.setBrightness(ctx.setting.value);
+        logger.debug('backgroundBrightness изменил значение:', ctx.setting.value);
     });
 
     addon.addAction('backgroundBrightnessCorrection', (ctx) => {
         background.setBrightnessCorrection(ctx.setting.value);
+        logger.debug('backgroundBrightnessCorrection изменил значение:', ctx.setting.value);
     });
 
     addon.addAction('backgroundBlur', (ctx) => {
         background.setBlur(ctx.setting.value);
+        logger.debug('backgroundBlur изменил значение:', ctx.setting.value);
+    });
+
+    addon.addAction('debugMode', (ctx) => {
+        logger.setDebug(ctx.setting.value);
+        logger.debug('debugMode изменил значение:', ctx.setting.value);
     });
 
     addon.player.on('openPlayer', (ctx) => {
+        logger.debug('Плеер открыт. Применяем изменения');
+
         const backgroundCover = ctx.settings.get('backgroundCover');
         const backgroundImage = ctx.settings.get('backgroundImage');
         const backgroundBrightness = ctx.settings.get('backgroundBrightness');
@@ -69,6 +87,8 @@ export function mountPlayer(): void {
     });
 
     addon.player.on('trackChange', (ctx) => {
+        logger.debug('Трек изменен. Обновляем некоторые элементы');
+
         const backgroundCover = ctx.settings.get('backgroundCover');
         const image = 'https://' + ctx.state.track.coverUri.replace('%%', '1000x1000');
 

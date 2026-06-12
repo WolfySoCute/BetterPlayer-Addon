@@ -85,6 +85,19 @@
 					"defaultValue": 8
 				}
 			]
+		},
+		{
+			"title": "Дополнительное",
+			"items": [
+				{
+					"id": "debugMode",
+					"name": "Debug режим",
+					"description": "Включает debug логирование в консоли. Если вы не знаете для чего это, то выключите",
+					"type": "button",
+					"value": false,
+					"defaultValue": false
+				}
+			]
 		}
 	]
 }
