@@ -18,12 +18,6 @@ export class Controls {
         return document.querySelector(FULLSCREEN_PLAYER);
     }
 
-    public hideCover(isHidden: boolean) {
-        const posterDiv = document.querySelector(PLAYER_CONTROLS.posterContent);
-        if (isHidden) posterDiv?.classList.add('hidden');
-        else posterDiv?.classList.remove('hidden');
-    }
-
     public setContentBackground(id: number) {
         const fullscreenPlayerDiv = this.fullscreenPlayerDiv;
         fullscreenPlayerDiv?.style.setProperty('--content-background-style', id.toString());
@@ -61,17 +55,17 @@ export class Controls {
         if (!fullscreenPlayerDiv) return;
 
         const customControls = fullscreenPlayerDiv.querySelector('.customControls');
-        if (controlsEnabled && customControls !== null) return;
+        if (controlsEnabled && customControls) return;
 
         if (controlsEnabled) {
-            this.hideCover(true);
+            fullscreenPlayerDiv.dataset.customControls = 'true';
             const timecodeWrapper = fullscreenPlayerDiv.querySelector(PLAYER_CONTROLS.timecodeWrapper);
             const playerControls = timecodeWrapper?.parentElement;
 
             playerControls?.appendChild(this.createControlsDiv());
         } else {
-            if (customControls !== null) {
-                this.hideCover(false);
+            fullscreenPlayerDiv.dataset.customControls = 'false';
+            if (customControls) {
                 customControls.remove();
             }
         }
