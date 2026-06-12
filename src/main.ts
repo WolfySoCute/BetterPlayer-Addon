@@ -1,4 +1,3 @@
-import './styles/additional.css';
 import './styles/additionalContent.css';
 import './styles/background.css';
 import './styles/customControls.css';
