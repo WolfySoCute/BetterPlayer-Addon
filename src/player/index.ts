@@ -111,4 +111,5 @@ export function mountPlayer(): void {
 
 
     addon.start();
+    logger.info('Аддон инициализирован')
 }
