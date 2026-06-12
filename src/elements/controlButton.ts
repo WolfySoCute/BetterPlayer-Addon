@@ -15,7 +15,7 @@ export abstract class ControlButton {
     private domObserver: MutationObserver | null = null;
     private attributesObserver: MutationObserver | null = null;
 
-    constructor(
+    protected constructor(
         protected id: string,
         protected selector: string,
         public size: ButtonSize,
