@@ -3,7 +3,7 @@
 */
 
 @container style(--content-background-style: 2) {
-    div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"],
+    div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"],
     :has(> .customControls) {
         background-color: rgba(0, 0, 0, 0.35);
         backdrop-filter: blur(15px);
@@ -11,7 +11,7 @@
 }
 
 @container style(--content-background-style: 3) {
-    div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"],
+    div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"],
     :has(> .customControls) {
         background-color: rgba(0, 0, 0, 0.5);
         backdrop-filter: invert(1) blur(15px);

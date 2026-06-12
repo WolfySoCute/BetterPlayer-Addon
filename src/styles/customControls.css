@@ -4,7 +4,6 @@
 
 .customControls {
     margin-top: 16px;
-    /*margin: 26px 0;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -108,6 +107,6 @@
     padding-top: 0;
 }
 
-div[data-test-id="FULLSCREEN_PLAYER_MODAL"][style*="--background"] input[data-test-id="TIMECODE_SLIDER"] {
+div[data-test-id="FULLSCREEN_PLAYER_MODAL"] input[data-test-id="TIMECODE_SLIDER"] {
     --slider-thumb-box-shadow-color: transparent !important;
 }

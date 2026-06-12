@@ -2,12 +2,16 @@
     Стили для дополнительного контента (Текст, очередь)
 */
 
-div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) {
+div[data-custom-controls="true"] div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"] {
+    display: none !important;
+}
+
+div[data-custom-controls="true"] div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT'] {
     transform: translate(calc(50dvw - var(--fullscreen-player-content-size-px)/2), calc(100dvh - var(--fullscreen-player-height-px)/2 + 16px));
     animation-name: none;
 }
 
-div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] {
+div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"] {
     transform: translate(50%);
     height: calc(100% - (var(--fullscreen-player-content-size-px)/2) - 24px - 32px);
     top: 24px;
@@ -18,7 +22,7 @@ div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="F
     backdrop-filter var(--ym-duration-transition);
 }
 
-div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] > div {
+div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"] > div {
     mask-image: linear-gradient(
             to bottom,
             transparent 0%,
@@ -28,9 +32,9 @@ div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="F
     );
 }
 
-div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] > div,
-div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] > div .PlayQueue_content__zIUvd,
-div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] > div .PlayQueue_content__zIUvd div[data-test-id="PLAY_QUEUE_AFTER_PLAYING_BLOCK"]
+div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"] > div,
+div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"] .PlayQueue_content__zIUvd,
+div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"] div[data-test-id="PLAY_QUEUE_AFTER_PLAYING_BLOCK"]
 {
     height: 100%;
     min-height: 100%;
@@ -38,20 +42,19 @@ div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="F
     margin-block: 0;
 }
 
-div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] div[data-test-id="SYNC_LYRICS_CONTENT"] {
+div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"] div[data-test-id="SYNC_LYRICS_CONTENT"] {
     container-type: size;
 }
 
-div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"] div[data-test-id="SYNC_LYRICS_CONTENT"] > div {
-    /*padding-block-start: calc(50cqh + 2rem/2);*/
+div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"] div[data-test-id="SYNC_LYRICS_CONTENT"] > div {
     padding-block-start: 50cqh;
 }
 
-div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"][class*="enter_active"] {
+div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"][class*="enter_active"] {
     animation-name: FullscreenPlayerDesktopContent_enter-fade-additional-content_custom;
 }
 
-div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) ~ div[class*="FullscreenPlayerDesktopContent_additionalContent"][class*="exit_active"] {
+div[data-custom-controls="true"] div[class*="FullscreenPlayerDesktopContent_additionalContent"][class*="exit_active"] {
     animation-name: FullscreenPlayerDesktopContent_leave-fade-additional-content_custom;
 }
 
@@ -87,7 +90,7 @@ div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT']:has(div[data-test-id="F
     }
 }
 
-body:has(div[data-test-id='FULLSCREEN_PLAYER_FULLSCREEN_CONTENT'] div[data-test-id="FULLSCREEN_PLAYER_POSTER_CONTENT"].hidden) :has(> div[data-test-id="TRACK_CONTEXT_MENU"]){
+body:has(div[data-custom-controls="true"]) :has(> div[data-test-id="TRACK_CONTEXT_MENU"]){
     top: initial !important;
     left: 25vw !important;
     bottom: 10vh !important;
