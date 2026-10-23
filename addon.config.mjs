@@ -3,7 +3,7 @@ const addonConfig = {
     directoryName: 'betterplayer',
     name: 'BetterPlayer',
     description: 'Кастомизация для стандартного полноэкранного плеера',
-    version: '1.6.1',
+    version: '2.0.0',
     author: ['WolfySoCute', 'forea.adoxid'],
     cssScope: 'global',
     requirements: {
