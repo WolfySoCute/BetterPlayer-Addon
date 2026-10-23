@@ -1,44 +1,59 @@
-/*
-    Стили для смены фона
-*/
-
-div[data-test-id='FULLSCREEN_PLAYER_MODAL']::before {
-    opacity: 1;
-    background: var(--background);
-}
-
-div[data-test-id='FULLSCREEN_PLAYER_MODAL']::after {
-    opacity: 0;
-    background: var(--background-next);
-}
-
-div[data-test-id='FULLSCREEN_PLAYER_MODAL'].animate::after {
-    opacity: 1;
-}
-
-div[data-test-id='FULLSCREEN_PLAYER_MODAL']::before,
-div[data-test-id='FULLSCREEN_PLAYER_MODAL']::after {
-    content: '';
+.betterplayerBackground {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     z-index: -1;
+    pointer-events: none;
+}
 
-    filter: blur(var(--blur, 0px)) brightness(calc(var(--brightness, 1) * var(--brightness-correction, 1)));
-
+.betterplayerBackgroundLayer {
+    position: absolute;
+    inset: 0;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    transition:
-            opacity 0.5s ease-in-out,
-            filter 0.5s ease-in-out;
+    filter: blur(var(--betterplayer-blur, 0px)) brightness(var(--betterplayer-brightness, 1));
+    transition: filter 0.5s ease-in-out;
 }
 
-.PlayQueue_root__ponhw::after,
-.PlayQueue_root__ponhw::before,
-div[data-test-id='SYNC_LYRICS_CONTENT']::after,
-div[data-test-id='SYNC_LYRICS_CONTENT']::before {
+.betterplayerBackgroundCurrent {
+    animation: betterplayer-background-in 0.5s ease-in-out both;
+}
+
+.betterplayerBackgroundPrevious {
+    animation: betterplayer-background-out 0.5s ease-in-out both;
+}
+
+@keyframes betterplayer-background-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes betterplayer-background-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Native solid-color fades do not match the image background in either control layout. */
+[data-test-id='FULLSCREEN_PLAYER_MODAL']:has(.betterplayerBackground) :is([data-test-id='PLAY_QUEUE'], [data-test-id='SYNC_LYRICS_CONTENT'])::before,
+[data-test-id='FULLSCREEN_PLAYER_MODAL']:has(.betterplayerBackground) :is([data-test-id='PLAY_QUEUE'], [data-test-id='SYNC_LYRICS_CONTENT'])::after {
     display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .betterplayerBackgroundLayer {
+        animation: none;
+        transition: none;
+    }
+
+    .betterplayerBackgroundPrevious {
+        display: none;
+    }
 }

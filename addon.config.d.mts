@@ -5,7 +5,8 @@ declare const addonConfig: {
     description: string
     version: string
     author: string | string[]
-    type: 'script' | 'theme' | 'library' | string
+    cssScope: 'global'
+    requirements: { minHostApi: number; capabilities: string[] }
     image: string
     banner: string
     libraryLogo: string

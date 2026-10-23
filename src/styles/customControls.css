@@ -11,17 +11,21 @@
 
 .customControls .customButton {
     color: var(--ym-controls-color-secondary-text-enabled_variant);
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    line-height: 0;
+    transform: none;
     background: none;
 
     border-radius: var(--ym-radius-size-round);
     border: none;
     cursor: pointer;
     transition:
-            background-color var(--ym-duration-transition),
-            transform var(--ym-duration-transition),
-            color var(--ym-duration-transition),
-            opacity var(--ym-duration-transition);
+        background-color var(--ym-duration-transition),
+        color var(--ym-duration-transition),
+        opacity var(--ym-duration-transition);
 }
 
 .customControls .customButton.bordered {
@@ -39,15 +43,35 @@
     color: var(--ym-controls-color-secondary-text-disabled);
 }
 
+.customControls .betterplayerButtonIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    transform: scale(1);
+    transform-origin: center;
+    transition: transform 160ms ease-out;
+}
+
 .customControls .customButton:not(:disabled):focus-visible,
 .customControls .customButton:not(:disabled):hover {
+    transform: none;
+}
+
+.customControls .customButton:not(:disabled):focus-visible > .betterplayerButtonIcon,
+.customControls .customButton:not(:disabled):hover > .betterplayerButtonIcon {
     transform: scale(1.1);
 }
 
 @media (prefers-reduced-motion: reduce) {
     .customControls .customButton,
-    .customControls .customButton:not(:disabled) {
+    .customControls .betterplayerButtonIcon {
         transition: none;
+    }
+
+    .customControls .customButton:not(:disabled):focus-visible > .betterplayerButtonIcon,
+    .customControls .customButton:not(:disabled):hover > .betterplayerButtonIcon {
+        transform: none;
     }
 }
 
@@ -87,26 +111,27 @@
     width: var(--ym-icon-size-l);
 }
 
-:has(> .customControls) > div[data-test-id="TIMECODE_WRAPPER"] {
+[data-betterplayer-panel] > div[data-test-id='TIMECODE_WRAPPER'] {
     column-gap: var(--ym-spacer-size-xs) !important;
     grid-template: 'start slider end' auto/min-content auto min-content !important;
     row-gap: normal !important;
 }
 
-:has(> .customControls) {
+[data-betterplayer-panel] {
     padding: 24px;
     border-radius: 16px;
     height: fit-content;
     width: fit-content;
 
-    transition: background-color var(--ym-duration-transition),
-    backdrop-filter var(--ym-duration-transition);
+    transition:
+        background-color var(--ym-duration-transition),
+        backdrop-filter var(--ym-duration-transition);
 }
 
-:has(> .customControls) > .FullscreenPlayerDesktopContent_meta__3jDTy {
+[data-betterplayer-panel] > .FullscreenPlayerDesktopContent_meta__3jDTy {
     padding-top: 0;
 }
 
-div[data-test-id="FULLSCREEN_PLAYER_MODAL"] input[data-test-id="TIMECODE_SLIDER"] {
+div[data-test-id='FULLSCREEN_PLAYER_MODAL'] input[data-test-id='TIMECODE_SLIDER'] {
     --slider-thumb-box-shadow-color: transparent !important;
 }
