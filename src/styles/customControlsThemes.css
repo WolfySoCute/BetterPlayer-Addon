@@ -3,16 +3,16 @@
 */
 
 @container style(--content-background-style: 2) {
-    div[data-custom-controls="true"] div[class*="additionalContent"],
-    :has(> .customControls) {
+    div[data-betterplayer-controls='true'] div[class*='additionalContent'],
+    [data-betterplayer-panel] {
         background-color: rgba(0, 0, 0, 0.35);
         backdrop-filter: blur(15px);
     }
 }
 
 @container style(--content-background-style: 3) {
-    div[data-custom-controls="true"] div[class*="additionalContent"],
-    :has(> .customControls) {
+    div[data-betterplayer-controls='true'] div[class*='additionalContent'],
+    [data-betterplayer-panel] {
         background-color: rgba(0, 0, 0, 0.5);
         backdrop-filter: invert(1) blur(15px);
     }
