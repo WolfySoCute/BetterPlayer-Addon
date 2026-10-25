@@ -34,7 +34,25 @@ function ControlsPanel({ api }: AddonComponentProps) {
         const originalPanel = panel.getAttribute('data-betterplayer-panel')
         root.setAttribute('data-betterplayer-controls', 'true')
         panel.setAttribute('data-betterplayer-panel', '')
+        // ChromaSync detects BetterPlayer through the legacy WolfyLibrary style ID.
+        let compatibilityMarker: HTMLStyleElement | null = null
+        const syncChromaSyncCompatibility = () => {
+            if (!document.querySelector('style#css-chromasync')) {
+                compatibilityMarker?.remove()
+                compatibilityMarker = null
+                return
+            }
+            if (document.getElementById('BetterPlayer-styles')) return
+            compatibilityMarker = document.createElement('style')
+            compatibilityMarker.id = 'BetterPlayer-styles'
+            document.head.append(compatibilityMarker)
+        }
+        const compatibilityObserver = new MutationObserver(syncChromaSyncCompatibility)
+        compatibilityObserver.observe(document.head, { childList: true })
+        syncChromaSyncCompatibility()
         return () => {
+            compatibilityObserver.disconnect()
+            compatibilityMarker?.remove()
             if (originalControls === null) root.removeAttribute('data-betterplayer-controls')
             else root.setAttribute('data-betterplayer-controls', originalControls)
             if (originalPanel === null) panel.removeAttribute('data-betterplayer-panel')
